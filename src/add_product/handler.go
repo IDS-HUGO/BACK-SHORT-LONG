@@ -15,6 +15,7 @@ func NewHandler(service *Service) *Handler {
 
 func (h *Handler) AddProductHandler(w http.ResponseWriter, r *http.Request) {
 	var producto Producto
+
 	if err := json.NewDecoder(r.Body).Decode(&producto); err != nil {
 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
@@ -24,5 +25,6 @@ func (h *Handler) AddProductHandler(w http.ResponseWriter, r *http.Request) {
 }
 func (h *Handler) GetAllProductsHandler(w http.ResponseWriter, r *http.Request) {
 	productos := h.Service.GetAllProducts()
+
 	json.NewEncoder(w).Encode(productos)
 }
